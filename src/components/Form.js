@@ -41,45 +41,70 @@ const validationSchema = yup.object().shape({
     .max(4, 'Must be exactly 4 digits'),
 });
 
-function Form() {
+function Form({ onSubmit }) {
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: onSubmit,
+  });
+
+  /**
+   * getFieldProps is a way to reduce boilerplate (repetitive) code.
+   * It returns a helper methods like `onChange`, `onBlur`, `value`, `name`.
+   *
+   * @see Formik https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
+   */
+
+  const nameProps = formik.getFieldProps('name');
+  const emailProps = formik.getFieldProps('email');
+  const phoneProps = formik.getFieldProps('phone');
+  const passwordProps = formik.getFieldProps('password');
+  const confirmPasswordProps = formik.getFieldProps('confirmPassword');
+  const pinProps = formik.getFieldProps('pin');
   return (
     <Box>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <InputForm
           name="name"
           placeholder="Enter your Full name"
           label="Name"
           type="text"
+          {...nameProps}
         />
         <InputForm
           name="email"
           placeholder="Enter your email"
           label="Email"
           type="email"
+          {...emailProps}
         />
         <InputForm
           name="phone-number"
           placeholder="Your phone number"
           label="Phone Number"
           type="number"
+          {...phoneProps}
         />
         <InputForm
           name="password"
           placeholder="Enter password"
           label="Password"
           type="password"
+          {...passwordProps}
         />
         <InputForm
           name="confirm-password"
           placeholder="Confirm password"
           label="Confirm Password"
           type="password"
+          {...confirmPasswordProps}
         />
         <InputForm
           name="pin"
           placeholder="Enter your pin"
           label="Pin"
           type="password"
+          {...pinProps}
         />
         <Button type="submit">Submit</Button>
       </form>
