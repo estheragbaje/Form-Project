@@ -13,6 +13,7 @@ function App() {
       backgroundColor="gray.700"
       style={{ backgroundBlendMode: 'overlay' }}
       minHeight="100vh"
+      paddingTop={8}
     >
       <Router>
         <Switch>

@@ -1,4 +1,4 @@
-import { Box, Button, Image, SimpleGrid, Text } from '@chakra-ui/core';
+import { Box, Button, Image, SimpleGrid, Text, Heading } from '@chakra-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
 import CreditCardInput from 'react-credit-card-input';
@@ -75,50 +75,61 @@ function Form({ onSubmit }) {
   return (
     <Box p={12} bg="white" maxW="1100px" margin="auto" borderRadius={12}>
       <form onSubmit={formik.handleSubmit}>
-        <SimpleGrid columns={2} spacing={8}>
+        <SimpleGrid columns={[1, 1, 2]} spacing={8}>
           <Box>
+            <Heading textAlign="center">Fill in your Details</Heading>
             <Image
-              src="https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              // src="https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src="../handshake-colour-800px.png"
               alt="welcome"
               maxHeight="300px"
-              objectFit="contain"
+              objectFit="cover"
+              width="100%"
             />
             <InputForm
-              name="name"
               placeholder="Enter your Full name"
               label="Name"
               type="text"
+              error={formik.errors.name}
+              isInvalid={formik.errors.name && formik.touched.name}
               {...nameProps}
             />
             <SimpleGrid columns={2} spacing={4}>
               <InputForm
-                name="email"
                 placeholder="Enter your email"
                 label="Email"
                 type="email"
+                error={formik.errors.email}
+                isInvalid={formik.errors.email && formik.touched.email}
                 {...emailProps}
               />
               <InputForm
-                name="phone-number"
                 placeholder="Your phone number"
                 label="Phone Number"
                 type="number"
+                error={formik.errors.phone}
+                isInvalid={formik.errors.phone && formik.touched.phone}
                 {...phoneProps}
               />
             </SimpleGrid>
             <SimpleGrid columns={2} spacing={4}>
               <InputForm
-                name="password"
                 placeholder="Enter password"
                 label="Password"
                 type="password"
+                error={formik.errors.password}
+                isInvalid={formik.errors.password && formik.touched.password}
                 {...passwordProps}
               />
               <InputForm
-                name="confirm-password"
                 placeholder="Confirm password"
                 label="Confirm Password"
                 type="password"
+                error={formik.errors.confirmPassword}
+                isInvalid={
+                  formik.errors.confirmPassword &&
+                  formik.touched.confirmPassword
+                }
                 {...confirmPasswordProps}
               />
             </SimpleGrid>
@@ -131,7 +142,7 @@ function Form({ onSubmit }) {
             <Image
               src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"
               alt="welcome"
-              maxH="64px"
+              maxH="40px"
               objectFit="contain"
             />
             <Box paddingTop={12}>
@@ -143,10 +154,11 @@ function Form({ onSubmit }) {
               />
             </Box>
             <InputForm
-              name="pin"
               placeholder="Enter your pin"
               label="Pin"
               type="password"
+              error={formik.errors.pin}
+              isInvalid={formik.errors.pin && formik.touched.pin}
               {...pinProps}
             />
             <Button width="100%" size="lg" type="submit" variantColor="orange">
