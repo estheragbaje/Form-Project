@@ -77,12 +77,14 @@ function Form({ onSubmit }) {
       <form onSubmit={formik.handleSubmit}>
         <SimpleGrid columns={[1, 1, 2]} spacing={8}>
           <Box>
-            <Heading textAlign="center">Fill in your Details</Heading>
+            <Heading textAlign="center" fontSize="2xl" paddingBottom={4}>
+              Fill in your Details
+            </Heading>
             <Image
               // src="https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
               src="../handshake-colour-800px.png"
               alt="welcome"
-              maxHeight="300px"
+              maxHeight="260px"
               objectFit="cover"
               width="100%"
             />
@@ -137,13 +139,13 @@ function Form({ onSubmit }) {
 
           <Box>
             {/* <Divider orientation="vertical" /> */}
-            <Text>Credit Card Details</Text>
+            <Heading fontSize="lg">Credit Card Details</Heading>
 
             <Image
               src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"
               alt="welcome"
               maxH="40px"
-              objectFit="contain"
+              objectFit="cover"
             />
             <Box paddingTop={12}>
               <CreditCardInput
