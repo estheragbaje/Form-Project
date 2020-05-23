@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Box, Button } from '@chakra-ui/core';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -55,9 +56,11 @@ function Form({ onSubmit }) {
     onSubmit: onSubmit,
   });
 
+  const history = useHistory();
+
   /**
    * getFieldProps is a way to reduce boilerplate (repetitive) code.
-   * It returns a helper methods like `onChange`, `onBlur`, `value`, `name`.
+   * It returns helper methods like `onChange`, `onBlur`, `value`, `name`.
    *
    * @see Formik https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
    */
@@ -123,7 +126,9 @@ function Form({ onSubmit }) {
           type="password"
           {...pinProps}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" onClick={() => history.push('/dashboard')}>
+          Submit
+        </Button>
       </form>
     </Box>
   );
