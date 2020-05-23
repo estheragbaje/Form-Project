@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button } from '@chakra-ui/core';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import CreditCardInput from 'react-credit-card-input';
 import InputForm from './InputForm';
 
 const initialValues = {
@@ -11,6 +12,9 @@ const initialValues = {
   password: '',
   confirmPassword: '',
   pin: '',
+  cardNumber: '',
+  expiry: '',
+  cvc: '',
 };
 
 const validationSchema = yup.object().shape({
@@ -39,6 +43,9 @@ const validationSchema = yup.object().shape({
     .matches(/^[0-9]+$/, 'Must be only digits')
     .min(4, 'Must be exactly 4 digits')
     .max(4, 'Must be exactly 4 digits'),
+  cardNumber: yup.string().required(),
+  expiry: yup.string().required(),
+  cvc: yup.string().required(),
 });
 
 function Form({ onSubmit }) {
@@ -61,6 +68,10 @@ function Form({ onSubmit }) {
   const passwordProps = formik.getFieldProps('password');
   const confirmPasswordProps = formik.getFieldProps('confirmPassword');
   const pinProps = formik.getFieldProps('pin');
+  const cardNumberProps = formik.getFieldProps('cardNumber');
+  const cardExpiryProps = formik.getFieldProps('expiry');
+  const cardCvcProps = formik.getFieldProps('cvc');
+
   return (
     <Box>
       <form onSubmit={formik.handleSubmit}>
@@ -98,6 +109,12 @@ function Form({ onSubmit }) {
           label="Confirm Password"
           type="password"
           {...confirmPasswordProps}
+        />
+        <CreditCardInput
+          fieldClassName="input"
+          cardNumberInputProps={cardNumberProps}
+          cardExpiryInputProps={cardExpiryProps}
+          cardCVCInputProps={cardCvcProps}
         />
         <InputForm
           name="pin"
