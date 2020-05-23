@@ -1,12 +1,25 @@
 import React from 'react';
-import { Box, Input, Text } from '@chakra-ui/core';
+import {
+  Box,
+  Input,
+  Text,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+} from '@chakra-ui/core';
 
-function InputForm({ placeholder, name, type, label, ...props }) {
+function InputForm({
+  placeholder,
+  name,
+  type,
+  label,
+  isInvalid,
+  error,
+  ...rest
+}) {
   return (
-    <Box my={8}>
-      <Text fontSize={14} textAlign="left">
-        {label}
-      </Text>
+    <FormControl isInvalid={isInvalid} py={3}>
+      <FormLabel>{label}</FormLabel>
       <Input
         placeholder={placeholder}
         label={label}
@@ -16,8 +29,10 @@ function InputForm({ placeholder, name, type, label, ...props }) {
         errorBorderColor="crimson"
         variant="flushed"
         py={2}
+        {...rest}
       />
-    </Box>
+      <FormErrorMessage>{error}</FormErrorMessage>
+    </FormControl>
   );
 }
 

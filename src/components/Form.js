@@ -1,9 +1,8 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Box, Button } from '@chakra-ui/core';
+import { Box, Button, Image, SimpleGrid, Text } from '@chakra-ui/core';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import React from 'react';
 import CreditCardInput from 'react-credit-card-input';
+import * as yup from 'yup';
 import InputForm from './InputForm';
 
 const initialValues = {
@@ -56,8 +55,6 @@ function Form({ onSubmit }) {
     onSubmit: onSubmit,
   });
 
-  const history = useHistory();
-
   /**
    * getFieldProps is a way to reduce boilerplate (repetitive) code.
    * It returns helper methods like `onChange`, `onBlur`, `value`, `name`.
@@ -76,59 +73,87 @@ function Form({ onSubmit }) {
   const cardCvcProps = formik.getFieldProps('cvc');
 
   return (
-    <Box>
+    <Box p={12} bg="white" maxW="1100px" margin="auto" borderRadius={12}>
       <form onSubmit={formik.handleSubmit}>
-        <InputForm
-          name="name"
-          placeholder="Enter your Full name"
-          label="Name"
-          type="text"
-          {...nameProps}
-        />
-        <InputForm
-          name="email"
-          placeholder="Enter your email"
-          label="Email"
-          type="email"
-          {...emailProps}
-        />
-        <InputForm
-          name="phone-number"
-          placeholder="Your phone number"
-          label="Phone Number"
-          type="number"
-          {...phoneProps}
-        />
-        <InputForm
-          name="password"
-          placeholder="Enter password"
-          label="Password"
-          type="password"
-          {...passwordProps}
-        />
-        <InputForm
-          name="confirm-password"
-          placeholder="Confirm password"
-          label="Confirm Password"
-          type="password"
-          {...confirmPasswordProps}
-        />
-        <CreditCardInput
-          fieldClassName="input"
-          cardNumberInputProps={cardNumberProps}
-          cardExpiryInputProps={cardExpiryProps}
-          cardCVCInputProps={cardCvcProps}
-        />
-        <InputForm
-          name="pin"
-          placeholder="Enter your pin"
-          label="Pin"
-          type="password"
-          {...pinProps}
-        />
-        <Button type="submit" onClick={() => history.push('/dashboard')}>
-          Submit
-        </Button>
+        <SimpleGrid columns={2} spacing={8}>
+          <Box>
+            <Image
+              src="https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              alt="welcome"
+              maxHeight="300px"
+              objectFit="contain"
+            />
+            <InputForm
+              name="name"
+              placeholder="Enter your Full name"
+              label="Name"
+              type="text"
+              {...nameProps}
+            />
+            <SimpleGrid columns={2} spacing={4}>
+              <InputForm
+                name="email"
+                placeholder="Enter your email"
+                label="Email"
+                type="email"
+                {...emailProps}
+              />
+              <InputForm
+                name="phone-number"
+                placeholder="Your phone number"
+                label="Phone Number"
+                type="number"
+                {...phoneProps}
+              />
+            </SimpleGrid>
+            <SimpleGrid columns={2} spacing={4}>
+              <InputForm
+                name="password"
+                placeholder="Enter password"
+                label="Password"
+                type="password"
+                {...passwordProps}
+              />
+              <InputForm
+                name="confirm-password"
+                placeholder="Confirm password"
+                label="Confirm Password"
+                type="password"
+                {...confirmPasswordProps}
+              />
+            </SimpleGrid>
+          </Box>
+
+          <Box>
+            {/* <Divider orientation="vertical" /> */}
+            <Text>Credit Card Details</Text>
+
+            <Image
+              src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"
+              alt="welcome"
+              maxH="64px"
+              objectFit="contain"
+            />
+            <Box paddingTop={12}>
+              <CreditCardInput
+                fieldClassName="input"
+                cardNumberInputProps={cardNumberProps}
+                cardExpiryInputProps={cardExpiryProps}
+                cardCVCInputProps={cardCvcProps}
+              />
+            </Box>
+            <InputForm
+              name="pin"
+              placeholder="Enter your pin"
+              label="Pin"
+              type="password"
+              {...pinProps}
+            />
+            <Button width="100%" size="lg" type="submit" variantColor="orange">
+              Submit
+            </Button>
+          </Box>
+        </SimpleGrid>
       </form>
     </Box>
   );
