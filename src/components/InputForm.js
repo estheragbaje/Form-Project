@@ -28,7 +28,6 @@ function InputForm({
         focusBorderColor="#1898cb"
         errorBorderColor="crimson"
         variant="flushed"
-        // py={2}
         {...rest}
       />
       <FormErrorMessage>{error}</FormErrorMessage>

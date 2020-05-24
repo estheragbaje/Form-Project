@@ -1,20 +1,17 @@
 import {
+  Avatar,
   Box,
   Button,
+  Heading,
   Image,
   SimpleGrid,
-  Text,
-  Avatar,
-  Heading,
-  Divider,
-  InputLeftAddon,
 } from '@chakra-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
 import CreditCardInput from 'react-credit-card-input';
 import * as yup from 'yup';
-import InputForm from './InputForm';
 import FormSubHeading from './FormSubheading';
+import InputForm from './InputForm';
 
 const initialValues = {
   name: '',
@@ -28,10 +25,54 @@ const initialValues = {
   cvc: '',
 };
 
+const validPhones = [
+  '703',
+  '706',
+  '803',
+  '806',
+  '810',
+  '813',
+  '814',
+  '816',
+  '903',
+  '705',
+  '805',
+  '811',
+  '815',
+  '905',
+  '701',
+  '708',
+  '802',
+  '808',
+  '812',
+  '902',
+  '809',
+  '817',
+  '818',
+  '909',
+  '804',
+];
+
 const validationSchema = yup.object().shape({
   name: yup.string().required().min(3, 'Name is too short'),
   email: yup.string().email().required(),
-  phone: yup.string().required(),
+  phone: yup
+    .string()
+    .required()
+    .matches(/^[0-9]+$/, 'Number must be only digits')
+    .min(10, 'Number must be 11 digits')
+    .max(10, 'Number must be 11 digits')
+    .test('digits', 'Must be valid Nigerian number', (val) => {
+      // ensure phone matches at least of the prefix
+      if (!val) return false;
+      return validPhones.some((prefix) => {
+        return val.startsWith(prefix);
+      });
+    }),
+  // .test('prefix', 'Must start with 0', (val) => {
+  //   if (!val) return false;
+  //   return val.startsWith("0");
+  // }),
   password: yup
     .string()
     .required('Please enter your password')
@@ -39,7 +80,7 @@ const validationSchema = yup.object().shape({
       /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
       'Password must contain at least 6 characters, one uppercase, one number and one special case character'
     ),
-  confirmpassword: yup
+  confirmPassword: yup
     .string()
     .required('Please confirm your password')
     .when('password', {
@@ -162,7 +203,7 @@ function Form({ onSubmit }) {
 
             <Image
               src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"
-              alt="welcome"
+              alt="credit card details"
               maxH="40px"
               objectFit="cover"
             />
@@ -188,6 +229,7 @@ function Form({ onSubmit }) {
                 size="lg"
                 type="submit"
                 variantColor="orange"
+                disabled={!(formik.isValid && formik.dirty)}
               >
                 Submit
               </Button>
