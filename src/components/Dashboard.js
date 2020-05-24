@@ -1,43 +1,41 @@
 import React from 'react';
-import { Box, Heading, Text } from '@chakra-ui/core';
-// import {
-//   Drawer,
-//   DrawerBody,
-//   DrawerFooter,
-//   DrawerHeader,
-//   DrawerOverlay,
-//   DrawerContent,
-//   DrawerCloseButton,
-//   useDisclosure,
-//   Button,
-// } from '@chakra-ui/core';
+import { Box, Heading, Stack, Text, Flex, Avatar } from '@chakra-ui/core';
+import DashboardItem from './DashboardItem';
 
-// function Dashboard() {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   const [placement, setPlacement] = React.useState('left');
-//   const handlePlacementChange = (event) => setPlacement(event.target.value);
-
-//   return (
-//     <>
-//       <Drawer placement="left">
-//         <DrawerOverlay />
-//         <DrawerContent>
-//           <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
-//           <DrawerBody>
-//             <Text>Profile</Text>
-//             <Text>Settings</Text>
-//           </DrawerBody>
-//         </DrawerContent>
-//       </Drawer>
-//     </>
-//   );
-// }
 function Dashboard() {
   return (
-    <Box>
-      <Heading textAlign="center" color="white">
-        Welcome to Softcom!
-      </Heading>
+    <Box my={-16}>
+      <Flex direction={['column', 'column', 'row']}>
+        <Box
+          height="100vh"
+          bg="#0B6487"
+          minW="300px"
+          margin="auto"
+          display={['none', 'none', 'block']}
+        >
+          <Box textAlign="center" paddingTop={12}>
+            <Avatar
+              name="Dan Abrahmov"
+              src="https://bit.ly/dan-abramov"
+              size="xl"
+            />
+            <Text color="white" fontSize="24px">
+              Dan Abramov
+            </Text>
+          </Box>
+          <Stack marginLeft="32px" marginTop={12}>
+            <DashboardItem menu="DASHBOARD" color="orange.200" />
+            <DashboardItem menu="PROFILE" />
+            <DashboardItem menu="PAYMENT HISTORY" />
+            <DashboardItem menu="NOTIFICATION" />
+            <DashboardItem menu="SETTINGS" />
+            <DashboardItem menu="LOGOUT" />
+          </Stack>
+        </Box>
+        <Box bg="white" width="100%" py={8}>
+          <Heading textAlign="center">Welcome to Softcom!</Heading>
+        </Box>
+      </Flex>
     </Box>
   );
 }
