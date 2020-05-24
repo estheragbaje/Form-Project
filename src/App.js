@@ -10,10 +10,10 @@ function App() {
     <Box
       backgroundImage="url('https://images.unsplash.com/photo-1508873699372-7aeab60b44ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')"
       backgroundSize="cover"
-      backgroundColor="gray.700"
+      backgroundColor="#193641"
       style={{ backgroundBlendMode: 'overlay' }}
       minHeight="100vh"
-      paddingTop={8}
+      paddingTop={16}
     >
       <Router>
         <Switch>
@@ -23,7 +23,7 @@ function App() {
             render={(props) => (
               <Form
                 onSubmit={(value) => {
-                  console.log(value)
+                  console.log(value);
                   props.history.push('/dashboard');
                 }}
               />

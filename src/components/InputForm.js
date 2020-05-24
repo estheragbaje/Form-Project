@@ -18,7 +18,7 @@ function InputForm({
   ...rest
 }) {
   return (
-    <FormControl isInvalid={isInvalid} py={3}>
+    <FormControl isInvalid={isInvalid} py={2}>
       <FormLabel>{label}</FormLabel>
       <Input
         placeholder={placeholder}
@@ -28,7 +28,7 @@ function InputForm({
         focusBorderColor="#1898cb"
         errorBorderColor="crimson"
         variant="flushed"
-        py={2}
+        // py={2}
         {...rest}
       />
       <FormErrorMessage>{error}</FormErrorMessage>

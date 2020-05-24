@@ -4,6 +4,7 @@ import {
   Image,
   SimpleGrid,
   Text,
+  Avatar,
   Heading,
   Divider,
   InputLeftAddon,
@@ -13,6 +14,7 @@ import React from 'react';
 import CreditCardInput from 'react-credit-card-input';
 import * as yup from 'yup';
 import InputForm from './InputForm';
+import FormSubHeading from './FormSubheading';
 
 const initialValues = {
   name: '',
@@ -82,28 +84,30 @@ function Form({ onSubmit }) {
   const cardCvcProps = formik.getFieldProps('cvc');
 
   return (
-    <Box
-      p={12}
-      bg="white"
-      maxW="1100px"
-      margin="auto"
-      borderRadius={12}
- 
-    >
+    <Box p={12} bg="white" maxW="1100px" margin="auto" borderRadius={12}>
       <form onSubmit={formik.handleSubmit}>
-        <SimpleGrid columns={[1, 1, 2]} spacing={8}>
+        <SimpleGrid columns={[1, 1, 2]} spacing={12}>
           <Box>
-            <Heading textAlign="center" fontSize="2xl" paddingBottom={4}>
-              Fill in your Details
+            <Heading textAlign="center" size="lg" paddingBottom={4}>
+              Kindly fill in all your details
             </Heading>
-            <Image
+
+            <Avatar
+              size="2xl"
+              marginLeft="160px"
+              name="Welcome"
+              src="../handshake-colour-800px.png"
+              bg="white"
+            />
+            {/* <Image
               // src="https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
               src="../handshake-colour-800px.png"
               alt="welcome"
-              maxHeight="260px"
+              maxHeight="210px"
               objectFit="cover"
               width="100%"
-            />
+            /> */}
+            <FormSubHeading Children="Personal Details" />
             <InputForm
               placeholder="Enter your Full name"
               label="Name"
@@ -154,8 +158,7 @@ function Form({ onSubmit }) {
           </Box>
 
           <Box>
-            {/* <Divider orientation="vertical" /> */}
-            <Heading fontSize="lg">Credit Card Details</Heading>
+            <FormSubHeading Children="Credit Card Details" />
 
             <Image
               src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"
@@ -164,7 +167,6 @@ function Form({ onSubmit }) {
               objectFit="cover"
             />
             <Box paddingTop={12}>
-              <Divider bg="#1898cb" />
               <CreditCardInput
                 fieldClassName="input"
                 cardNumberInputProps={cardNumberProps}
@@ -180,9 +182,16 @@ function Form({ onSubmit }) {
               isInvalid={formik.errors.pin && formik.touched.pin}
               {...pinProps}
             />
-            <Button width="100%" size="lg" type="submit" variantColor="orange">
-              Submit
-            </Button>
+            <Box py={12}>
+              <Button
+                width="100%"
+                size="lg"
+                type="submit"
+                variantColor="orange"
+              >
+                Submit
+              </Button>
+            </Box>
           </Box>
         </SimpleGrid>
       </form>
