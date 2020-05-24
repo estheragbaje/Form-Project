@@ -1,4 +1,13 @@
-import { Box, Button, Image, SimpleGrid, Text, Heading } from '@chakra-ui/core';
+import {
+  Box,
+  Button,
+  Image,
+  SimpleGrid,
+  Text,
+  Heading,
+  Divider,
+  InputLeftAddon,
+} from '@chakra-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
 import CreditCardInput from 'react-credit-card-input';
@@ -18,7 +27,7 @@ const initialValues = {
 };
 
 const validationSchema = yup.object().shape({
-  name: yup.string().required().min(2, 'Name is too short'),
+  name: yup.string().required().min(3, 'Name is too short'),
   email: yup.string().email().required(),
   phone: yup.string().required(),
   password: yup
@@ -73,7 +82,14 @@ function Form({ onSubmit }) {
   const cardCvcProps = formik.getFieldProps('cvc');
 
   return (
-    <Box p={12} bg="white" maxW="1100px" margin="auto" borderRadius={12}>
+    <Box
+      p={12}
+      bg="white"
+      maxW="1100px"
+      margin="auto"
+      borderRadius={12}
+ 
+    >
       <form onSubmit={formik.handleSubmit}>
         <SimpleGrid columns={[1, 1, 2]} spacing={8}>
           <Box>
@@ -148,6 +164,7 @@ function Form({ onSubmit }) {
               objectFit="cover"
             />
             <Box paddingTop={12}>
+              <Divider bg="#1898cb" />
               <CreditCardInput
                 fieldClassName="input"
                 cardNumberInputProps={cardNumberProps}

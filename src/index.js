@@ -7,7 +7,16 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
+    <ThemeProvider
+      theme={{
+        ...theme,
+        fonts: {
+          ...theme.fonts,
+          body: 'Meriweather, serif',
+          heading: 'Soleil, sans-serif',
+        },
+      }}
+    >
       <CSSReset />
       <App />
     </ThemeProvider>
