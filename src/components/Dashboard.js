@@ -1,43 +1,27 @@
+import { Avatar, Box, Flex, Heading, Stack, Text } from '@chakra-ui/core';
 import React from 'react';
-import {
-  Box,
-  Heading,
-  Stack,
-  Text,
-  Flex,
-  Avatar,
-  AvatarBadge,
-} from '@chakra-ui/core';
 import DashboardItem from './DashboardItem';
 
 function Dashboard() {
   return (
-    <Box my={-16}>
+    <Box>
       <Flex direction={['column', 'column', 'row']}>
         <Box
           height="100vh"
           bg="#0B6487"
-          minW="300px"
+          minWidth="300px"
           margin="auto"
-          flex="1"
           display={['none', 'none', 'block']}
-          // py={-4}
         >
           <Box textAlign="center" paddingTop={12}>
             <Avatar
-              name="Dan Abramov"
-              src="https://bit.ly/dan-abramov"
+              name="Folasade Agbaje"
+              src="https://avatars3.githubusercontent.com/u/53586167?s=460&u=48c4b82a10336f52e2e64d67b488347de79519b8&v=4"
               size="xl"
-            >
-              <AvatarBadge
-                size="0.30em"
-                bg="green.500"
-                borderColor="green.500"
-              />
-            </Avatar>
+            />
 
             <Text color="white" fontSize="24px">
-              Dan Abramov
+              Folasade Agbaje
             </Text>
           </Box>
           <Stack marginLeft="32px" marginTop={12}>
@@ -49,8 +33,8 @@ function Dashboard() {
             <DashboardItem menu="LOGOUT" />
           </Stack>
         </Box>
-        <Box bg="white" width="100%" py={8}>
-          <Heading textAlign="center" height="100vh">
+        <Box bg="white" flex={1}>
+          <Heading textAlign="center" marginTop="64px">
             Welcome to Softcom!
           </Heading>
         </Box>

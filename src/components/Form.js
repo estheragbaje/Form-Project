@@ -60,13 +60,17 @@ const validationSchema = yup.object().shape({
     .string()
     .required()
     .matches(/^[0-9]+$/, 'Phone number must be only digits')
-    .test('digits', 'Must be valid Nigerian number (e.g. 0818-XXX-XXXX)', (val) => {
-      // ensure phone matches at least of the prefix
-      if (!val) return false;
-      return validPhones.some((prefix) => {
-        return val.startsWith('0' + prefix);
-      });
-    })
+    .test(
+      'digits',
+      'Must be valid Nigerian number (e.g. 0818-XXX-XXXX)',
+      (val) => {
+        // ensure phone matches at least of the prefix
+        if (!val) return false;
+        return validPhones.some((prefix) => {
+          return val.startsWith('0' + prefix);
+        });
+      }
+    )
     .min(11, 'Phone must be 11 digits')
     .max(11, 'Phone must be 11 digits'),
   password: yup
@@ -122,124 +126,125 @@ function Form({ onSubmit }) {
 
   return (
     <Box
-      p={12}
-      bg="white"
-      maxW="1100px"
-      margin="auto"
-      borderRadius={12}
-      box-shadow="0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.36)"
+      backgroundImage="url('https://images.unsplash.com/photo-1508873699372-7aeab60b44ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')"
+      backgroundSize="cover"
+      backgroundColor="#193641"
+      style={{ backgroundBlendMode: 'overlay' }}
+      minHeight="100vh"
+      paddingTop={16}
     >
-      <form onSubmit={formik.handleSubmit}>
-        <SimpleGrid columns={[1, 1, 2]} spacing={12}>
-          <Box>
-            <Heading textAlign="center" size="lg" paddingBottom={4}>
-              Kindly fill in all your details
-            </Heading>
+      <Box
+        p={12}
+        bg="white"
+        maxW="1100px"
+        margin="auto"
+        borderRadius={12}
+        box-shadow="0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.36)"
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <SimpleGrid columns={[1, 1, 2]} spacing={12}>
+            <Box>
+              <Heading textAlign="center" size="lg" paddingBottom={4}>
+                Kindly fill in all your details
+              </Heading>
 
-            <Avatar
-              size="2xl"
-              marginLeft="160px"
-              name="Welcome"
-              src="../handshake-colour-800px.png"
-              bg="white"
-            />
-            {/* <Image
-              // src="https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              src="../handshake-colour-800px.png"
-              alt="welcome"
-              maxHeight="210px"
-              objectFit="cover"
-              width="100%"
-            /> */}
-            <FormSubHeading Children="Personal Details" />
-            <InputForm
-              placeholder="Enter your Full name"
-              label="Name"
-              type="text"
-              error={formik.errors.name}
-              isInvalid={formik.errors.name && formik.touched.name}
-              {...nameProps}
-            />
-            <SimpleGrid columns={2} spacing={4}>
+              <Avatar
+                size="2xl"
+                marginLeft="160px"
+                name="Welcome"
+                src="../handshake-colour-800px.png"
+                bg="white"
+              />
+              <FormSubHeading Children="Personal Details" />
               <InputForm
-                placeholder="Enter your email"
-                label="Email"
-                type="email"
-                error={formik.errors.email}
-                isInvalid={formik.errors.email && formik.touched.email}
-                {...emailProps}
+                placeholder="Enter your Full name"
+                label="Name"
+                type="text"
+                error={formik.errors.name}
+                isInvalid={formik.errors.name && formik.touched.name}
+                {...nameProps}
               />
-              <InputForm
-                placeholder="Your phone number"
-                label="Phone Number"
-                type="tel"
-                error={formik.errors.phone}
-                isInvalid={formik.errors.phone && formik.touched.phone}
-                {...phoneProps}
-              />
-            </SimpleGrid>
-            <SimpleGrid columns={2} spacing={4}>
-              <InputForm
-                placeholder="Enter password"
-                label="Password"
-                type="password"
-                error={formik.errors.password}
-                isInvalid={formik.errors.password && formik.touched.password}
-                {...passwordProps}
-              />
-              <InputForm
-                placeholder="Confirm password"
-                label="Confirm Password"
-                type="password"
-                error={formik.errors.confirmPassword}
-                isInvalid={
-                  formik.errors.confirmPassword &&
-                  formik.touched.confirmPassword
-                }
-                {...confirmPasswordProps}
-              />
-            </SimpleGrid>
-          </Box>
-
-          <Box>
-            <FormSubHeading Children="Credit Card Details" />
-
-            <Image
-              src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"
-              alt="credit card details"
-              maxH="40px"
-              objectFit="cover"
-            />
-            <Box paddingTop={12}>
-              <CreditCardInput
-                fieldClassName="input"
-                cardNumberInputProps={cardNumberProps}
-                cardExpiryInputProps={cardExpiryProps}
-                cardCVCInputProps={cardCvcProps}
-              />
+              <SimpleGrid columns={[1, 1, 2]} spacing={4}>
+                <InputForm
+                  placeholder="Enter your email"
+                  label="Email"
+                  type="email"
+                  error={formik.errors.email}
+                  isInvalid={formik.errors.email && formik.touched.email}
+                  {...emailProps}
+                />
+                <InputForm
+                  placeholder="Your phone number"
+                  label="Phone Number"
+                  type="tel"
+                  error={formik.errors.phone}
+                  isInvalid={formik.errors.phone && formik.touched.phone}
+                  {...phoneProps}
+                />
+              </SimpleGrid>
+              <SimpleGrid columns={[1, 1, 2]} spacing={4}>
+                <InputForm
+                  placeholder="Enter password"
+                  label="Password"
+                  type="password"
+                  error={formik.errors.password}
+                  isInvalid={formik.errors.password && formik.touched.password}
+                  {...passwordProps}
+                />
+                <InputForm
+                  placeholder="Confirm password"
+                  label="Confirm Password"
+                  type="password"
+                  error={formik.errors.confirmPassword}
+                  isInvalid={
+                    formik.errors.confirmPassword &&
+                    formik.touched.confirmPassword
+                  }
+                  {...confirmPasswordProps}
+                />
+              </SimpleGrid>
             </Box>
-            <InputForm
-              placeholder="Enter your pin"
-              label="Pin"
-              type="password"
-              error={formik.errors.pin}
-              isInvalid={formik.errors.pin && formik.touched.pin}
-              {...pinProps}
-            />
-            <Box py={12}>
-              <Button
-                width="100%"
-                size="lg"
-                type="submit"
-                variantColor="orange"
-                disabled={!(formik.isValid && formik.dirty)}
-              >
-                Submit
-              </Button>
+
+            <Box>
+              <FormSubHeading Children="Credit Card Details" />
+
+              <Image
+                src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"
+                alt="credit card details"
+                maxH="40px"
+                objectFit="cover"
+              />
+              <Box paddingTop={12}>
+                <CreditCardInput
+                  fieldClassName="input"
+                  cardNumberInputProps={cardNumberProps}
+                  cardExpiryInputProps={cardExpiryProps}
+                  cardCVCInputProps={cardCvcProps}
+                />
+              </Box>
+              <InputForm
+                placeholder="Enter your pin"
+                label="Pin"
+                type="password"
+                error={formik.errors.pin}
+                isInvalid={formik.errors.pin && formik.touched.pin}
+                {...pinProps}
+              />
+              <Box py={12}>
+                <Button
+                  width="100%"
+                  size="lg"
+                  type="submit"
+                  variantColor="orange"
+                  disabled={!(formik.isValid && formik.dirty)}
+                >
+                  Submit
+                </Button>
+              </Box>
             </Box>
-          </Box>
-        </SimpleGrid>
-      </form>
+          </SimpleGrid>
+        </form>
+      </Box>
     </Box>
   );
 }

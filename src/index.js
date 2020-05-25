@@ -5,18 +5,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const myTheme = {
+  ...theme,
+  fonts: {
+    ...theme.fonts,
+    body: 'Merriweather, serif',
+    heading: 'Soleil, sans-serif',
+  },
+};
+
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider
-      theme={{
-        ...theme,
-        fonts: {
-          ...theme.fonts,
-          body: 'Merriweather, serif',
-          heading: 'Soleil, sans-serif',
-        },
-      }}
-    >
+    <ThemeProvider theme={myTheme}>
       <CSSReset />
       <App />
     </ThemeProvider>
