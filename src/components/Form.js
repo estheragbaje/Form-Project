@@ -59,20 +59,16 @@ const validationSchema = yup.object().shape({
   phone: yup
     .string()
     .required()
-    .matches(/^[0-9]+$/, 'Number must be only digits')
-    .min(10, 'Number must be 11 digits')
-    .max(10, 'Number must be 11 digits')
-    .test('digits', 'Must be valid Nigerian number', (val) => {
+    .matches(/^[0-9]+$/, 'Phone number must be only digits')
+    .test('digits', 'Must be valid Nigerian number (e.g. 0818-XXX-XXXX)', (val) => {
       // ensure phone matches at least of the prefix
       if (!val) return false;
       return validPhones.some((prefix) => {
-        return val.startsWith(prefix);
+        return val.startsWith('0' + prefix);
       });
-    }),
-  // .test('prefix', 'Must start with 0', (val) => {
-  //   if (!val) return false;
-  //   return val.startsWith("0");
-  // }),
+    })
+    .min(11, 'Phone must be 11 digits')
+    .max(11, 'Phone must be 11 digits'),
   password: yup
     .string()
     .required('Please enter your password')
@@ -125,7 +121,14 @@ function Form({ onSubmit }) {
   const cardCvcProps = formik.getFieldProps('cvc');
 
   return (
-    <Box p={12} bg="white" maxW="1100px" margin="auto" borderRadius={12}>
+    <Box
+      p={12}
+      bg="white"
+      maxW="1100px"
+      margin="auto"
+      borderRadius={12}
+      box-shadow="0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.36)"
+    >
       <form onSubmit={formik.handleSubmit}>
         <SimpleGrid columns={[1, 1, 2]} spacing={12}>
           <Box>
@@ -169,7 +172,7 @@ function Form({ onSubmit }) {
               <InputForm
                 placeholder="Your phone number"
                 label="Phone Number"
-                type="number"
+                type="tel"
                 error={formik.errors.phone}
                 isInvalid={formik.errors.phone && formik.touched.phone}
                 {...phoneProps}

@@ -1,5 +1,13 @@
 import React from 'react';
-import { Box, Heading, Stack, Text, Flex, Avatar } from '@chakra-ui/core';
+import {
+  Box,
+  Heading,
+  Stack,
+  Text,
+  Flex,
+  Avatar,
+  AvatarBadge,
+} from '@chakra-ui/core';
 import DashboardItem from './DashboardItem';
 
 function Dashboard() {
@@ -11,14 +19,23 @@ function Dashboard() {
           bg="#0B6487"
           minW="300px"
           margin="auto"
+          flex="1"
           display={['none', 'none', 'block']}
+          // py={-4}
         >
           <Box textAlign="center" paddingTop={12}>
             <Avatar
-              name="Dan Abrahmov"
+              name="Dan Abramov"
               src="https://bit.ly/dan-abramov"
               size="xl"
-            />
+            >
+              <AvatarBadge
+                size="0.30em"
+                bg="green.500"
+                borderColor="green.500"
+              />
+            </Avatar>
+
             <Text color="white" fontSize="24px">
               Dan Abramov
             </Text>
@@ -33,7 +50,9 @@ function Dashboard() {
           </Stack>
         </Box>
         <Box bg="white" width="100%" py={8}>
-          <Heading textAlign="center">Welcome to Softcom!</Heading>
+          <Heading textAlign="center" height="100vh">
+            Welcome to Softcom!
+          </Heading>
         </Box>
       </Flex>
     </Box>

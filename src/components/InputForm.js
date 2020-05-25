@@ -30,7 +30,7 @@ function InputForm({
         variant="flushed"
         {...rest}
       />
-      <FormErrorMessage>{error}</FormErrorMessage>
+      <FormErrorMessage fontFamily="body">{error}</FormErrorMessage>
     </FormControl>
   );
 }

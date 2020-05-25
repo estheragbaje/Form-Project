@@ -12,7 +12,7 @@ ReactDOM.render(
         ...theme,
         fonts: {
           ...theme.fonts,
-          body: 'Meriweather, serif',
+          body: 'Merriweather, serif',
           heading: 'Soleil, sans-serif',
         },
       }}
