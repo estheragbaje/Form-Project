@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Box } from '@chakra-ui/core';
 import './App.css';
-import Form from './components/Form';
 import Dashboard from './components/Dashboard';
+import Form from './components/Form';
 
 function App() {
   return (

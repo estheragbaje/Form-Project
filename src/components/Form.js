@@ -25,50 +25,51 @@ const initialValues = {
   cvc: '',
 };
 
-const validPhones = [
-  '703',
-  '706',
-  '803',
-  '806',
-  '810',
-  '813',
-  '814',
-  '816',
-  '903',
-  '705',
-  '805',
-  '811',
-  '815',
-  '905',
-  '701',
-  '708',
-  '802',
-  '808',
-  '812',
-  '902',
-  '809',
-  '817',
-  '818',
-  '909',
-  '804',
+const validPhonePrefix = [
+  '0703',
+  '0706',
+  '0803',
+  '0806',
+  '0810',
+  '0813',
+  '0814',
+  '0816',
+  '0903',
+  '0705',
+  '0805',
+  '0811',
+  '0815',
+  '0905',
+  '0701',
+  '0708',
+  '0802',
+  '0808',
+  '0812',
+  '0902',
+  '0809',
+  '0817',
+  '0818',
+  '0909',
+  '0804',
 ];
 
 const validationSchema = yup.object().shape({
-  name: yup.string().required().min(3, 'Name is too short'),
-  email: yup.string().email().required(),
+  name: yup
+    .string()
+    .required('Please enter your name')
+    .min(2, 'Name must be at least 2 character'),
+  email: yup.string().email().required('Email cannot be empty'),
   phone: yup
     .string()
-    .required()
+    .required('Please enter your phone number')
     .matches(/^[0-9]+$/, 'Phone number must be only digits')
     .test(
       'digits',
       'Must be valid Nigerian number (e.g. 0818-XXX-XXXX)',
-      (val) => {
-        // ensure phone matches at least of the prefix
-        if (!val) return false;
-        return validPhones.some((prefix) => {
-          return val.startsWith('0' + prefix);
-        });
+      (phone) => {
+        if (!phone) return false;
+        // check that the phone number starts with one of the valid prefixes
+        return validPhonePrefix.some((prefix) => phone.startsWith(prefix));
       }
     )
     .min(11, 'Phone must be 11 digits')
@@ -84,17 +85,15 @@ const validationSchema = yup.object().shape({
     .string()
     .required('Please confirm your password')
     .when('password', {
-      is: (val) => (val && val.length > 0 ? true : false),
-      then: yup
-        .string()
-        .oneOf([yup.ref('password')], 'Needs to be the same as password value'),
+      is: (password) => (password && password.length > 0 ? true : false),
+      then: yup.string().oneOf([yup.ref('password')], "Password doesn't match"),
     }),
   pin: yup
     .string()
-    .required()
-    .matches(/^[0-9]+$/, 'Must be only digits')
-    .min(4, 'Must be exactly 4 digits')
-    .max(4, 'Must be exactly 4 digits'),
+    .required('Please enter your pin')
+    .matches(/^[0-9]+$/, 'Pin must be only digits')
+    .min(4, 'Pin must be exactly 4 digits')
+    .max(4, 'Pin must be exactly 4 digits'),
   cardNumber: yup.string().required(),
   expiry: yup.string().required(),
   cvc: yup.string().required(),
@@ -155,7 +154,7 @@ function Form({ onSubmit }) {
                 src="../handshake-colour-800px.png"
                 bg="white"
               />
-              <FormSubHeading Children="Personal Details" />
+              <FormSubHeading children="Personal Details" />
               <InputForm
                 placeholder="Enter your Full name"
                 label="Name"
@@ -206,7 +205,7 @@ function Form({ onSubmit }) {
             </Box>
 
             <Box>
-              <FormSubHeading Children="Credit Card Details" />
+              <FormSubHeading children="Credit Card Details" />
 
               <Image
                 src="https://www.pngitem.com/pimgs/m/5-55223_visa-mastercard-logo-png-transparent-png.png"

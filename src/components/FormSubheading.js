@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Heading, Divider } from '@chakra-ui/core';
 
-function FormSubHeading({ Children, ...rest }) {
+function FormSubHeading({ children, ...rest }) {
   return (
-    <Box {...rest} paddingBottom={2}>
-      <Heading size="sm">{Children}</Heading>
+    <Box paddingBottom={2} {...rest}>
+      <Heading size="sm">{children}</Heading>
       <Divider
         borderWidth="5px"
         width="5%"

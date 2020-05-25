@@ -1,12 +1,5 @@
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/core';
 import React from 'react';
-import {
-  Box,
-  Input,
-  Text,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-} from '@chakra-ui/core';
 
 function InputForm({
   placeholder,
@@ -18,7 +11,7 @@ function InputForm({
   ...rest
 }) {
   return (
-    <FormControl isInvalid={isInvalid} py={2}>
+    <FormControl isInvalid={isInvalid} paddingY={2}>
       <FormLabel>{label}</FormLabel>
       <Input
         placeholder={placeholder}

@@ -5,6 +5,7 @@ import DashboardItem from './DashboardItem';
 function Dashboard() {
   return (
     <Box>
+      {/* Passing array values to flexDirection is how Chakra UI handles responsive design */}
       <Flex direction={['column', 'column', 'row']}>
         <Box
           height="100vh"
@@ -25,12 +26,14 @@ function Dashboard() {
             </Text>
           </Box>
           <Stack marginLeft="32px" marginTop={12}>
-            <DashboardItem menu="DASHBOARD" color="orange.200" />
-            <DashboardItem menu="PROFILE" />
-            <DashboardItem menu="PAYMENT HISTORY" />
-            <DashboardItem menu="NOTIFICATION" />
-            <DashboardItem menu="SETTINGS" />
-            <DashboardItem menu="LOGOUT" />
+            <DashboardItem isActive>Dashboard</DashboardItem>
+            <DashboardItem>Profile</DashboardItem>
+            <DashboardItem>
+              Payment History
+            </DashboardItem>
+            <DashboardItem>Notification</DashboardItem>
+            <DashboardItem>Settings</DashboardItem>
+            <DashboardItem>Logout</DashboardItem>
           </Stack>
         </Box>
         <Box bg="white" flex={1}>
