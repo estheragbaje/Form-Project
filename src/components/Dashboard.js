@@ -21,16 +21,14 @@ function Dashboard() {
               size="xl"
             />
 
-            <Text color="white" fontSize="24px">
+            <Text color="white" fontSize="18px" paddingTop={4}>
               Folasade Agbaje
             </Text>
           </Box>
-          <Stack marginLeft="32px" marginTop={12}>
+          <Stack paddingX="32px" marginTop={12} spacing={12}>
             <DashboardItem isActive>Dashboard</DashboardItem>
             <DashboardItem>Profile</DashboardItem>
-            <DashboardItem>
-              Payment History
-            </DashboardItem>
+            <DashboardItem>Payment History</DashboardItem>
             <DashboardItem>Notification</DashboardItem>
             <DashboardItem>Settings</DashboardItem>
             <DashboardItem>Logout</DashboardItem>

@@ -7,7 +7,6 @@ function DashboardItem({ children, isActive, ...rest }) {
       <Heading
         textTransform="uppercase"
         color={isActive ? 'orange.200' : 'white'}
-        marginY={8}
         size="sm"
       >
         {children}
